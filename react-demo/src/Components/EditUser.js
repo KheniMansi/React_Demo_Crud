@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { addUser } from '../features/userSlice';
+import { editUser } from '../features/userSlice';
 
 const From = () => {
     const [fname, setFname] = useState("");
@@ -10,18 +10,21 @@ const From = () => {
     const dispatch = useDispatch();
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(addUser({
+        dispatch(editUser({
             fname:fname,
             lname: lname,
             email: email
         }));
     }
+
+    // const { id } = useParams();
+    
     return (
         <>
             <div className="container">
                 <div className="row">
                     <div className="col-md-8 m-auto">
-                        <h2 className="my-5 text-center mx-auto">Add User</h2>
+                        <h2 className="my-5 text-center mx-auto">Edit User </h2>
                         <Link to="/user"><p className="text-right">Back</p></Link>
                         <form method="post" onSubmit={handleSubmit}>
                             <div className="form-group">

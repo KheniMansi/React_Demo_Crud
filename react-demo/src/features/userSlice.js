@@ -3,7 +3,7 @@ export const userSlice = createSlice({
     name: "user",
     initialState: {
         user: null,
-        userData: null,
+        userDatas: null,
     },
     reducers: {
         login: (state, action) => {
@@ -25,6 +25,16 @@ export const userSlice = createSlice({
                 })
             console.log(state);
         },
+        userData: (state) => {
+            fetch(
+                "https://reqres.in/api/users")
+                .then((res) => res.json())
+                .then((json) => {
+                    state = json.data;
+                    state.user = state;
+                    console.log(state.user)
+                }).catch(err => console.log(err))
+        },
         editUser: (state, action) => {
             console.log(state);
             console.log(action);
@@ -34,8 +44,9 @@ export const userSlice = createSlice({
         }
     },
 });
-export const { login, logout, addUser, editUser } = userSlice.actions;
+export const { login, logout, addUser, editUser, userData } = userSlice.actions;
 
 export const selectUser = (state) => state.user.user;
+// export const selectUsers = (state) => state.user.userData;
 
 export default userSlice.reducer;

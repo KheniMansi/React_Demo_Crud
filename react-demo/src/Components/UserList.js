@@ -1,26 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { logout, selectUser } from "../features/userSlice";
+import { logout, selectUser, userData } from "../features/userSlice";
 
 const UserList = () => {
     
-    const user = useSelector(selectUser);
-    const [users, setUserData] = useState([]);
-    console.log(user)
+    const users = useSelector(selectUser);
+    // const [users, setUserData] = useState([]);
+    console.log('++++++++++++++++++++++++++++++++++++++++++++++++++++++'+users)
     const dispatch = useDispatch();
     const handleLogout = (e) => {
         e.preventDefault();
         dispatch(logout());
     }
-    const getUsers = async () => {
-        const response = await fetch("https://reqres.in/api/users");
-        const ok = await response.json();
-        const ok11 = ok.data;
-        setUserData(ok11);
-    }
+    // const getUsers = async () => {
+    //     const response = await fetch("https://reqres.in/api/users");
+    //     const ok = await response.json();
+    //     const ok11 = ok.data;
+    //     setUserData(ok11);
+    // }
     useEffect(() => {
-        getUsers();
+        dispatch(userData());
     }, []);
     return (
         <>
@@ -44,17 +44,18 @@ const UserList = () => {
                             {/* {user} */}
                             <tbody>
                                 {
-                                    
-                                users.map((key, index) => {
-                                    return (
-                                    <tr>
-                                        <td>{index+1}</td>
-                                        <td>{key.first_name}</td>
-                                        <td>{key.email}</td>
-                                        <td><Link to={`/user/edit/${key.id}`}><button>Edit</button></Link></td>
-                                    </tr>
-                                    )
-                                })}
+                                    console.log('---------------------------------------'+users)
+                                // users.map((key, index) => {
+                                //     return (
+                                //     <tr>
+                                //         <td>{index+1}</td>
+                                //         <td>{key.first_name}</td>
+                                //         <td>{key.email}</td>
+                                //         <td><Link to={`/user/edit/${key.id}`}><button>Edit</button></Link></td>
+                                //     </tr>
+                                //     )
+                                // })}
+                                }
                                 {/*                                     
                                     */}
                             </tbody>

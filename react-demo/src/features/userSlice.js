@@ -31,10 +31,30 @@ export const userSlice = createSlice({
                 .then((res) => res.json())
                 .then((json) => {
                     state = json.data;
-                    state.user = state;
-                    console.log(state.user)
+                    state.userDatas = state;
+                    console.log(state.userDatas)
                 }).catch(err => console.log(err))
+                // payload: {
+                //     id: nanoid(),
+                //     title,
+                //     content,
+                //     user: userId
+                //   }
         },
+        // postAdded: {
+        //     reducer(state, action) {
+        //       state.push(action.payload)
+        //     },
+        //     prepare(title, content, userId) {
+        //       return {
+        //         payload: {
+        //           id: nanoid(),
+        //           title,
+        //           content,
+        //           user: userId
+        //         }
+        //       }
+        //     }
         editUser: (state, action) => {
             console.log(state);
             console.log(action);
@@ -47,6 +67,6 @@ export const userSlice = createSlice({
 export const { login, logout, addUser, editUser, userData } = userSlice.actions;
 
 export const selectUser = (state) => state.user.user;
-// export const selectUsers = (state) => state.user.userData;
+export const listUserData = (state) => state.user.userDatas;
 
 export default userSlice.reducer;

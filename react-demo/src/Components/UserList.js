@@ -1,27 +1,35 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { logout, selectUser, userData } from "../features/userSlice";
+import { logout,userData, listUserData} from "../features/userSlice";
 
 const UserList = () => {
     
-    const users = useSelector(selectUser);
-    // const [users, setUserData] = useState([]);
-    console.log('++++++++++++++++++++++++++++++++++++++++++++++++++++++'+users)
+  
     const dispatch = useDispatch();
-    const handleLogout = (e) => {
-        e.preventDefault();
-        dispatch(logout());
-    }
     // const getUsers = async () => {
     //     const response = await fetch("https://reqres.in/api/users");
     //     const ok = await response.json();
     //     const ok11 = ok.data;
     //     setUserData(ok11);
     // }
+    dispatch(userData());
+    const listUserDatas = useSelector(listUserData);
     useEffect(() => {
-        dispatch(userData());
-    }, []);
+        if(listUserDatas){
+            console.log("-------------------------------------------");
+        } else {
+            console.log("-------------------else------------------------");
+    
+        }
+        // console.log("hyyyyy");
+    }, [listUserDatas]);
+    // const [users, setUserData] = useState([]);
+    console.log(listUserDatas);
+    const handleLogout = (e) => {
+        e.preventDefault();
+        dispatch(logout());
+    }
     return (
         <>
             <div className="container">
@@ -44,7 +52,7 @@ const UserList = () => {
                             {/* {user} */}
                             <tbody>
                                 {
-                                    console.log('---------------------------------------'+users)
+                                    // console.log('---------------------------------------'+users)
                                 // users.map((key, index) => {
                                 //     return (
                                 //     <tr>
